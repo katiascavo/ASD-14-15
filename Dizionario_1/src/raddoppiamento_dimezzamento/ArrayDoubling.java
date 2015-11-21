@@ -1,7 +1,11 @@
-package linked_structure;
+package raddoppiamento_dimezzamento;
+
+import linked_structure.Dizionario;
+
+//raddoppiamento/dimezzamento
 public class ArrayDoubling implements Dizionario {
 
-	private Coppia[] S = new Coppia[1];
+	private static Coppia[] S = new Coppia[1];
 	private int n = 0;
 
 	private class Coppia {
@@ -28,16 +32,12 @@ public class ArrayDoubling implements Dizionario {
 	public void delete(Comparable k) {
 
 		if (search(k) != null) {
-			int i = 0;
-			int j = 0;
+			int i;
 			for (i = 0; i < n; i++) {
 				if (k.compareTo(S[i].chiave) == 0) {
-					break;
+					S[i] = S[n-1];
 				}
-			}
-			for (j = i; j < n - 1; j++) {
-				S[j] = S[j + 1];
-			}
+			}			
 			n--;
 			if ((n > 1) && (n <= S.length / 4)) {
 				Coppia[] temp = new Coppia[S.length / 2];
@@ -57,5 +57,25 @@ public class ArrayDoubling implements Dizionario {
 			if (k.compareTo(S[i].chiave) == 0)
 				return S[i].elem;
 		return null;
+	}
+	
+	private static void inizializza(Dizionario d) {
+		d.insert("katia", "93757");
+		d.insert("Pippo","080123456");
+		d.insert("Pippo2","080123458");
+		d.insert("F", "6204920");
+		d.insert("c", "ciao");
+		}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Dizionario rubrica = new ArrayDoubling();
+		inizializza(rubrica);
+		System.out.println(rubrica.search("080123456"));
+		System.out.println(rubrica.search("080123458"));
+
+		rubrica.delete("080123458");
+		System.out.println(rubrica.search("080123458"));
+		
 	}
 }

@@ -1,4 +1,6 @@
-package linked_structure;
+package raddoppiamento_dimezzamento;
+
+import linked_structure.Dizionario;
 
 
 public class ArrayOrdinato implements Dizionario{

@@ -1,5 +1,5 @@
 package pila;
-
+//raddoppiamento/dimezzamento
 public class PilaArray<T> implements Pila<T> {
 
 	private Object S[] = new Object[1];

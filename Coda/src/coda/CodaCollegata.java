@@ -1,5 +1,5 @@
 package coda;
-
+// struttura collegata semplice
 public class CodaCollegata<T> implements Coda<T> {
 
 	private Record inizio = null;

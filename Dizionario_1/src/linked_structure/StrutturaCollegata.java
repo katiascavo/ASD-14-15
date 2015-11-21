@@ -1,5 +1,6 @@
 package linked_structure;
 
+//struttura circolare doppiamente collegata
 public class StrutturaCollegata implements Dizionario {
 
 	private Record list = null;
@@ -35,11 +36,17 @@ public class StrutturaCollegata implements Dizionario {
 	@Override
 	public void delete(Comparable k) {
 		// TODO Auto-generated method stub
-		if (list != null || search(k) != null) {
-			if (list.chiave.compareTo(k) == 0)
+		if (list == null)
+			throw new EmptyList("lista vuota");
+		if ((search(k) != null)) {
+			if (list.next.chiave == list.chiave)// se è unico punta a se stesso
 				list = null;
-			else {
-				for (Record p = list.next;; p = p.next) {
+			else if (list.chiave.equals(k)) {//se è il primo elemento
+				list.prev.next = list.next;
+				list.next.prev = list.prev;
+				list = list.next;
+			} else {
+				for (Record p = list;; p = p.next) {
 					if (p.chiave.equals(k)) {
 						p.prev.next = p.next;
 						p.next.prev = p.prev;
@@ -47,8 +54,8 @@ public class StrutturaCollegata implements Dizionario {
 					}
 				}
 			}
-		}
-
+		} else
+			throw new EmptyKey("chiave non presente");
 	}
 
 	@Override
@@ -65,9 +72,9 @@ public class StrutturaCollegata implements Dizionario {
 
 	private static void inizializza(Dizionario d) {
 
-		d.insert("Pippo", "080123456");
-		d.insert("Giò", "080654321");
-		d.insert("Lisa", "081123456");
+//		d.insert("Pippo", "080123456");
+//		d.insert("Giò", "080654321");
+//		d.insert("Lisa", "081123456");
 		d.insert("Gennarino", "081654321");
 		d.insert("Emy", "347112233");
 	}
@@ -77,20 +84,20 @@ public class StrutturaCollegata implements Dizionario {
 		inizializza(rubrica);
 
 		System.out.println(rubrica.search("081654321"));
-
-		rubrica.delete("081654321");
-		System.out.println(rubrica.search("081654321"));
 		System.out.println(rubrica.search("347112233"));
 
 		rubrica.delete("081654321");
-
-		rubrica.delete("080123456");
-
-		rubrica.delete("081123456");
-
-		rubrica.delete("347112233");
-
-		rubrica.delete("080654321");
+		System.out.println(rubrica.search("081654321"));
+//		System.out.println(rubrica.search("347112233"));
+//		System.out.println(rubrica.search("081123456"));
+//
+//		rubrica.delete("081123456");
+//		System.out.println(rubrica.search("081123456"));
+//
+//		System.out.println(rubrica.search("080123456"));
+//
+//		// rubrica.delete("080123456");
+//		System.out.println(rubrica.search("080123456"));
 
 	}
 
